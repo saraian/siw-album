@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Aggiungi o rimuovi attori</title>
+		<link rel="stylesheet" href="/stile.css?version=3"/>
+	</head>
+	<body>
+	<header th:replace="fragments/base.html::intestazione"></header>
+		<h1>Autori correnti: </h1>
+			<div th:each="artist:${artists}">
+				<form th:action="@{/modifyArtist/{idArtist}/{idAlbum} (idArtist=${actor.id}, idAlbum=${album.id})}" method="POST" th:object="${album}">
+					<button type="submit">
+						<li th:text="${artist.artName}"> Nome </li> 
+					</button>
+				</form>
+			</div>
+		<h1>Autori disponibili: </h1> 
+			<div th:each="other:${others}">
+				<form th:action="@{/modifyArtist/{idArtist}/{idMovie} (idArtist=${other.id}, idMovie=${movie.id})}" method="POST" th:object="${album}">
+					<button type="submit">
+						<li th:text="${other.artName}"> Nome </li> 
+					</button>
+				</form>
+			</div>
+	</body>
+</html>

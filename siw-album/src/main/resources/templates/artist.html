@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Film</title>
+		<link rel="stylesheet" href="/stile.css?version=2"/>
+	</head>
+	
+	<body>
+		<header th:replace="fragments/base.html::intestazione"></header>
+		<div th:if="${artist}">
+			<h1 th:text="${artist.artName}">Nome artista</h1>
+			<span><img width="30%" th:src=${artist.urlImage}/></span>
+		</div>
+		<div th:unless="${artist}">Non esiste</div>	
+	</body>
+</html>

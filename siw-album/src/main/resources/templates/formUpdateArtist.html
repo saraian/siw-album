@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title th:text="${movie.title}">Gestisci artista</title>
+		<link rel="stylesheet" href="/stile.css?version=3"/>
+	</head>
+	<body>
+		<header th:replace="fragments/base.html::intestazione"></header>
+		<h1 th:text="${artist.artName}"> Artista </h1>
+		<div>
+			<span th:text="${messaggioErrore}"> </span>
+		</div>
+		<div>
+			<a th:href="@{/updateArtistInfo/{id} (id=${artist.id})}"> Aggiorna le informazioni di questo artista </a>
+		</div>
+		<div>
+			<a th:href="@{/deleteArtist/{id} (id=${artist.id})}"> Elimina questo artista </a>
+		</div>
+	</body>
+</html>

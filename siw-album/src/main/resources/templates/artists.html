@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Lista artisti</title>
+		<link rel="stylesheet" href="/stile.css?version=3"/>
+	</head>
+	<body>
+	<header th:replace="fragments/base.html::intestazione"></header>
+	<h1>Artisti</h1>
+		<div th:if="${artists.empty}"> 
+			<div> Non ci sono artisti </div>
+		</div>
+		<div th:each="artist:${artists}">
+			<a th:href="@{/artists/{id} (id=${artist.id})}">
+				<li th:text="${artist.name}+' '+${artist.surname}"> Nome </li> 
+			</a>
+		</div>
+	</body>
+</html>

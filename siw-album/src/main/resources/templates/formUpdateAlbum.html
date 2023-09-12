@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title th:text="${album.title}">Modifica album</title>
+		<link rel="stylesheet" href="/stile.css?version=3"/>
+	</head>
+	<body>
+		<header th:replace="fragments/base.html::intestazione"></header>
+		<h1 th:text="${album.title}"> Album </h1>
+		<div>
+			<a th:href="@{/addArtistToAlbum/{idAlbum} (idAlbum=${album.id})}"> Aggiungi un artista </a>
+		</div>
+	</body>
+</html>

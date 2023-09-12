@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Nuovo artista</title>
+		<link rel="stylesheet" href="/stile.css?version=3"/>
+	</head>
+	<body>
+	<header th:replace="fragments/base.html::intestazione"></header>
+	<h1>Aggiungi un artista </h1>
+	<form th:action="@{/artists}" method="POST" th:object="${artist}">
+	<div th:if="${#fields.globalErrors()}" th:text="${err}">
+		<p th:each="err:${#fields.globalErrors()}" th:text="${err}">...</p>
+	</div>
+	<div>
+		<label>Nome d'arte:</label> <span><input required type="text" th:field="${artist.artName}"/></span>
+		<span th:if="${#fields.hasErrors('artName')}" th:errors="*{artName}"></span>
+	</div>
+	<div>
+		<label>Descrizione:</label><span><input required type="text" th:field="${artist.description}"/></span>
+		<span th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></span>
+	</div>
+	<div>
+		<label>URL immagine:</label><span><input type="url" th:field="${artist.urlImage}"/></span>
+	</div>
+	<div>
+	<span><button type="submit"> Conferma </button> </span>
+	</div>
+	</form>
+	</body>
+</html>

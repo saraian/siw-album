@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Nuovo album</title>
+		<link rel="stylesheet" href="/stile.css?version=3"/>
+	</head>
+	<body>
+	<header th:replace="fragments/base.html::intestazione"></header>
+	<h1>Aggiungi un album </h1>
+	<form th:action="@{/albums}" method="POST" th:object="${album}">
+	<div th:if="${#fields.globalErrors()}" th:text="${err}">
+		<p th:each="err:${#fields.globalErrors()}" th:text="${err}">...</p>
+	</div>
+	<div>
+		<label>Titolo:</label> <span><input required type="text" th:field="${album.title}"/></span>
+		<span th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></span>
+	</div>
+	<div>
+		<label>Anno:</label> <span><input required type="text" th:field="${album.year}"/></span>
+		<span th:if="${#fields.hasErrors('year')}" th:errors="*{year}"></span>
+	</div>
+	<div>
+		<label>Copertina:</label> <span><input required type="url" th:field="${album.cover}"/></span>
+	</div>
+	<div>
+	<span><button type="submit">Conferma </button> </span>
+	</div>
+	</form>
+	</body>
+</html>

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Gestisci artisti</title>
+		<link rel="stylesheet" href="/stile.css?version=3"/>
+	</head>
+	<body>
+	<header th:replace="fragments/base.html::intestazione"></header>
+	<h1>Scegli un artista da gestire</h1>
+		<div th:if="${artists.empty}"> 
+			<div> Non ci sono attori </div>
+		</div>
+		<div th:each="artist:${artists}">
+			<a th:href="@{/formUpdateArtist/{id} (id=${artist.id})}">
+				<li th:text="${artist.name}+' '+${artist.surname}">Nome Cognome </li> 
+			</a>
+		</div>
+	</body>
+</html>

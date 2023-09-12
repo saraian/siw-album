@@ -11,12 +11,12 @@ import org.springframework.validation.Validator;
 @Component
 public class AlbumValidator implements Validator {
 
-	@Autowired AlbumRepository movieRepository;
+	@Autowired AlbumRepository albumRepository;
 	
 	@Override
 	public void validate(Object object, Errors errors) {
 		Album album=(Album) object;
-		if(album.getTitle()!=null&&album.getYear()!=null&&movieRepository.existsByTitleAndYear(album.getTitle(), album.getYear())) {
+		if(album.getTitle()!=null&&album.getYear()!=null&&albumRepository.existsByTitleAndYear(album.getTitle(), album.getYear())) {
 			errors.reject("album.duplicate");
 		}
 	}

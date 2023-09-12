@@ -110,8 +110,38 @@ public class AlbumController {
 		this.artistRepository.save(newOne);
 		model.addAttribute("album", album);
 		model.addAttribute("artists", this.artistRepository.findByAlbumsWrittenContaining(album));
-		model.addAttribute("others", this.artistRepository.findByAlbumsWrittenContaining(album));
+		model.addAttribute("others", this.artistRepository.findByAlbumsWrittenNotContaining(album));
 		return "artistsToAdd.html";
+	}
+	
+	@GetMapping("/updateAlbumInfo/{idAlbum}")
+	public String updateProduct(@PathVariable("idAlbum") Long idAlbum, Model model) {
+		Album album=this.albumRepository.findById(idAlbum).get();
+		model.addAttribute("album", album);
+		return "formUpdateInfoAlbum.html";
+	}
+	
+	@PostMapping("/updateAlbumInfo/{idAlbum}") 
+	public String updateProductName(@ModelAttribute("album") Album album, @PathVariable("idAlbum") Long idAlbum, Model model) {
+		Album found=this.albumRepository.findById(idAlbum).get();
+		if(!album.getTitle().isBlank()) {
+			found.setTitle(album.getTitle());
+			found.setCover(album.getCover());
+			found.setYear(album.getYear());
+			this.albumRepository.save(found);
+			model.addAttribute("album",found);
+			return "album.html";
+		}
+		model.addAttribute("messaggioErrore", "Assicurati che tutti i campi siano validi");
+		return "formUpdateInfoAlbum.html";
+	}
+	
+	@GetMapping("/artistDisco/{id}")
+	public String artistForDisc(@PathVariable("id") Long id, Model model) {
+		Artist artist=this.artistRepository.findById(id).get();
+		List<Album> discography=this.albumRepository.findByArtistContainingOrderByYear(artist);
+		model.addAttribute("albums", discography);
+		return "discoList.html";
 	}
 	
 }

@@ -11,12 +11,31 @@
 			<span><img width="30%" th:src=${album.cover}/></span>
 			<h2> Autori: </h2>
 			<div th:each="author:${album.artist}">
-			<a th:href="@{/artists/{id} (id=${author.id})}">
+			<a th:href="@{/artist/{id} (id=${author.id})}">
 				<li th:text="${author.artName}"> Nome autore </li> 
 			</a>
 			</div>
 			<h2> Commenti dagli utenti: </h2>
-			<div> <a th:href="@{/addReview/{idAlbum} (idAlbum=${album.id})}"> Aggiungi una recensione </a> </div>
+			<form th:action="@{/addingReview/{idAlbum} (idAlbum=${album.id})}" method="POST" th:object="${newReview}">
+				<div th:if="${#fields.globalErrors()}" th:text="${err}">
+				<p th:each="err:${#fields.globalErrors()}" th:text="${err}">...</p>
+				</div>
+				<div>
+					<label>Titolo:</label> <span><input required type="text" th:field="${newReview.title}"/></span>
+					<span th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></span>
+				</div>
+				<div>
+					<label>Testo:</label> <span><input required type="text" th:field="${newReview.text}"/></span>
+					<span th:if="${#fields.hasErrors('text')}" th:errors="*{text}"></span>
+				</div>
+				<div>
+					<label>Voto:</label> <span><input required type="number" th:field="${newReview.vote}"/></span>
+					<span th:if="${#fields.hasErrors('vote')}" th:errors="*{vote}"></span>
+				</div>
+				<div>
+				<span><button type="submit">Conferma </button> </span>
+				</div>
+			</form>
 			<div th:each="userReview:${userReviews}">
 				<div th:text=${userReview.credentials.username}> User </div>
 				<div> <span th:text="${userReview.title}+': '"> Titolo: </span> </div>

@@ -80,7 +80,7 @@ public class ArtistController {
 	}
 	
 	@PostMapping("/updateArtistInfo/{idArtist}") 
-	public String updateProductName(@ModelAttribute("artist") Artist artist, @PathVariable("idArtist") Long idArtist, Model model) {
+	public String updateArtistInfo(@ModelAttribute("artist") Artist artist, @PathVariable("idArtist") Long idArtist, Model model) {
 		Artist found=this.artistRepository.findById(idArtist).get();
 		if(!artist.getArtName().isBlank()&&!(artist.getUrlImage().isEmpty())) {
 			found.setAlbumsWritten(artist.getAlbumsWritten());
@@ -93,5 +93,11 @@ public class ArtistController {
 		}
 		model.addAttribute("messaggioErrore", "Assicurati di aggiungere sia un nome che un'immagine validi");
 		return "formUpdateInfo.html";
+	}
+	
+	@GetMapping("/findArtistDiscography")
+	public String artistForDiscography(Model model) {
+		model.addAttribute("artists", this.artistRepository.findAll());
+		return "discographyForArtists.html";
 	}
 }

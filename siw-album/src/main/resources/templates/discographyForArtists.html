@@ -11,7 +11,7 @@
 			<div> Non ci sono artisti </div>
 		</div>
 		<div th:each="artist:${artists}">
-			<a th:href="@{/artists/{id} (id=${artist.id})}">
+			<a th:href="@{/artistDisco/{id} (id=${artist.id})}">
 				<li th:text="${artist.artName}"> Nome </li> 
 			</a>
 		</div>

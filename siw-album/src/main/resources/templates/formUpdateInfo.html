@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Modifica prodotto</title>
+		<title>Modifica artista</title>
 		<link  rel="stylesheet" th:href="@{css/1template.css}"/>
 	</head>
 	<body>
 		<header th:replace="fragments/base.html::intestazione"></header>
-		<h1> Aggiorna il prodotto </h1>
+		<h1> Aggiorna le informazioni dell'artista </h1>
 		<div>
 			<form th:action="@{/updateArtistInfo/{idArtist} (idArtist=${artist.id})}" method="POST" th:object="${artist}">
 			<div>
-			<label>Nome:</label> <span><input required type="text" th:field="${artist.name}" th:value="${artist.name}"/></span>
+			<label>Nome:</label> <span><input required type="text" th:field="${artist.artName}" th:value="${artist.artName}"/></span>
 			</div> 
 			<label>Descrizione:</label> <span><input required type="text" th:field="${artist.description}" th:value="${artist.description}"/></span> 
 			</div>

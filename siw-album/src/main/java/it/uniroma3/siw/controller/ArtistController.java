@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import it.uniroma3.siw.model.Artist;
 import it.uniroma3.siw.repository.ArtistRepository;
+import it.uniroma3.siw.service.ArtistService;
 import it.uniroma3.siw.validator.ArtistValidator;
 
 @Controller
@@ -18,6 +19,7 @@ public class ArtistController {
 	
 	@Autowired ArtistRepository artistRepository;
 	@Autowired ArtistValidator artistValidator;
+	@Autowired ArtistService artistService;
 	
 	@GetMapping("/formNewArtist")
 	public String formNewArtist(Model model) {
@@ -49,7 +51,7 @@ public class ArtistController {
 	//restituisce una pagina con i dati del film avente l'id corrispondente
 	@GetMapping("/artists/{id}")
 	public String getArtist(@PathVariable("id") Long id, Model model) {
-		model.addAttribute("artist", this.artistRepository.findById(id).get());
+		model.addAttribute("artist", this.artistService.findArtistById(id));
 		return "artist.html";
 	}	
 	
@@ -61,7 +63,7 @@ public class ArtistController {
 	
 	@GetMapping("/formUpdateArtist/{id}")
 	public String formUpdateArtist(@PathVariable("id") Long id, Model model) {
-		model.addAttribute("artist", this.artistRepository.findById(id).get());
+		model.addAttribute("artist", this.artistService.findArtistById(id));
 		return "formUpdateArtist.html";
 	}
 	
@@ -74,14 +76,14 @@ public class ArtistController {
 	
 	@GetMapping("/updateArtistInfo/{idArtist}")
 	public String updateProduct(@PathVariable("idArtist") Long idArtist, Model model) {
-		Artist artist=this.artistRepository.findById(idArtist).get();
+		Artist artist=this.artistService.findArtistById(idArtist);
 		model.addAttribute("artist", artist);
 		return "formUpdateInfo.html";
 	}
 	
 	@PostMapping("/updateArtistInfo/{idArtist}") 
 	public String updateArtistInfo(@ModelAttribute("artist") Artist artist, @PathVariable("idArtist") Long idArtist, Model model) {
-		Artist found=this.artistRepository.findById(idArtist).get();
+		Artist found=this.artistService.findArtistById(idArtist);
 		if(!artist.getArtName().isBlank()&&!(artist.getUrlImage().isEmpty())) {
 			found.setAlbumsWritten(artist.getAlbumsWritten());
 			found.setArtName(found.getArtName());

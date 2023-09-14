@@ -16,7 +16,7 @@
 			</a>
 			</div>
 			<h2> Commenti dagli utenti: </h2>
-			<form th:action="@{/updateReview/{idAlbum}/{idReview} (idAlbum=${album.id}, idComment=${upReview.id})}" method="POST" th:object="${upReview}">
+			<form th:action="@{/updateReview/{idAlbum}/{idReview} (idAlbum=${album.id}, idReview=${firstReview.id})}" method="POST" th:object="${upReview}">
 				<div th:if="${#fields.globalErrors()}" th:text="${err}">
 				<p th:each="err:${#fields.globalErrors()}" th:text="${err}">...</p>
 				</div>
@@ -29,7 +29,7 @@
 					<span th:if="${#fields.hasErrors('text')}" th:errors="*{text}"></span>
 				</div>
 				<div>
-					<label>Voto:</label> <span><input required type="number" th:field="${upReview.vote}" th:value="${upReview.vote}"/></span>
+					<label>Voto:</label> <span><input required type="range" min="1" max="100" value="1" class="slider" oninput="rangeValue.innerText=this.value" th:field="${upReview.vote}"/> </span> <span id="rangeValue"> </span>
 					<span th:if="${#fields.hasErrors('vote')}" th:errors="*{vote}"></span>
 				</div>
 				<div>
@@ -39,7 +39,7 @@
 			<div th:each="userReview:${userReviews}">
 				<div th:text=${userReview.credentials.username}> User </div>
 				<div> <span th:text="${userReview.title}+': '"> Titolo: </span> </div>
-				<div> <span th:text="${userReview.vote}+'/5'"> </span></div>
+				<div> <span th:text="${userReview.vote}+'%'"> </span></div>
 				<div> <span th:text=${userReview.text}> Testo </span> </div>
 				<div> <a th:href="@{/updateReview/{idAlbum}/{idReview} (idAlbum=${album.id}, idReview=${userReview.id})}"> Modifica la tua recensione </a> </div>
 			</div>

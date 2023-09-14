@@ -8,10 +8,10 @@
 	<header th:replace="fragments/base.html::intestazione"></header>
 	<h1>Login </h1>
 	<form th:action="@{/login}" method="POST">
-	<c:if test="${param.error != null}">
+	<c:if test="${param.error!=null}">
     	<div>
     		Failed to login.
-            <c:if test="${SPRING_SECURITY_LAST_EXCEPTION != null}">
+            <c:if test="${SPRING_SECURITY_LAST_EXCEPTION!=null}">
             	Reason: <c:out value="${SPRING_SECURITY_LAST_EXCEPTION.message}" />
             </c:if>
         </div>

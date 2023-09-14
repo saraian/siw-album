@@ -7,8 +7,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
-import jakarta.validation.constraints.Max;
-import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
@@ -21,9 +19,7 @@ public class Review {
 	@NotBlank
 	private String title;
 	@NotNull
-	@Min(1)
-	@Max(5)
-	private int vote;
+	private float vote;
 	@NotBlank
 	private String text;
 	@ManyToOne
@@ -47,10 +43,10 @@ public class Review {
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	public int getVote() {
+	public float getVote() {
 		return vote;
 	}
-	public void setVote(int vote) {
+	public void setVote(float vote) {
 		this.vote = vote;
 	}
 	public String getText() {

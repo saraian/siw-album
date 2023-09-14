@@ -1,8 +1,6 @@
 package it.uniroma3.siw.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,8 +27,7 @@ public class ReviewController {
 	@GetMapping("/addReview/{idAlbum}")
 	public String addReviewPage(@PathVariable("idAlbum") Long id, Model model) {
 		Album album=this.albumRepository.findById(id).get();
-		UserDetails userDetails=(UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		Credentials credentials=credentialsService.getCredentials(userDetails.getUsername());
+		Credentials credentials=credentialsService.findCredentials();
 		model.addAttribute("album", album);
 		model.addAttribute("newReview", new Review());
 		model.addAttribute("userReviews", this.reviewService.reviewsByCredentials(credentials, album.getReviews()));
@@ -41,13 +38,12 @@ public class ReviewController {
 	@PostMapping("/addingReview/{idAlbum}")
 	public String addComment(@ModelAttribute("newReview") Review newReview, @PathVariable("idAlbum") Long id, Model model) {
 		Album album=this.albumRepository.findById(id).get();
-		UserDetails userDetails=(UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		Credentials credentials=credentialsService.getCredentials(userDetails.getUsername());
+		Credentials credentials=credentialsService.findCredentials();
 		newReview.setCredentials(credentials);
 		album.getReviews().add(newReview);
 		this.reviewRepository.save(newReview);
 		this.albumRepository.save(album);
-		model.addAttribute("product", album);
+		model.addAttribute("album", album);
 		model.addAttribute("userReviews", this.reviewService.reviewsByCredentials(credentials, album.getReviews()));
 		model.addAttribute("reviews", this.reviewService.reviewsNotByCredentials(credentials, album.getReviews()));
 		return "album.html";
@@ -57,7 +53,12 @@ public class ReviewController {
 	public String updateCommentPage(@PathVariable("idAlbum") Long idA, @PathVariable("idReview") Long idR, Model model) {
 		Album album=this.albumRepository.findById(idA).get();
 		Review review=this.reviewRepository.findById(idR).get();
-		model.addAttribute("upReview", review);
+		Review upReview=new Review();
+		upReview.setText(review.getText());
+		upReview.setTitle(review.getTitle());
+		upReview.setVote(review.getVote());
+		model.addAttribute("firstReview", review);
+		model.addAttribute("upReview", upReview);
 		model.addAttribute("album", album);
 		return "albumUpdateReview.html";
 	}
@@ -66,20 +67,12 @@ public class ReviewController {
 	public String saveUpdate(@ModelAttribute("upReview") Review review, @PathVariable("idAlbum") Long id,
 			@PathVariable("idReview") Long idR, Model model) {
 		Album album=this.albumRepository.findById(id).get();
-		UserDetails userDetails=(UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		Credentials credentials=credentialsService.getCredentials(userDetails.getUsername());
-		if(!review.getTitle().isBlank()&&!review.getText().isBlank()) {
-			Review found=this.reviewRepository.findById(idR).get();
-			found.setTitle(review.getTitle());
-			found.setText(review.getText());
-			found.setVote(review.getVote());
-			this.reviewRepository.save(found);
-			model.addAttribute("album", album);
-			model.addAttribute("userReviews", this.reviewService.reviewsByCredentials(credentials, album.getReviews()));
-			model.addAttribute("reviews", this.reviewService.reviewsNotByCredentials(credentials, album.getReviews()));
-			return "album.html";
-		}
-		model.addAttribute("messaggioErrore", "Compila tutti i campi della recensione");
+		Review oldReview=this.reviewRepository.findById(idR).get();
+		Credentials credentials=credentialsService.findCredentials();
+		oldReview.setTitle(review.getTitle());
+		oldReview.setText(review.getText());
+		oldReview.setVote(review.getVote());
+		this.reviewRepository.save(oldReview);
 		model.addAttribute("album", album);
 		model.addAttribute("userReviews", this.reviewService.reviewsByCredentials(credentials, album.getReviews()));
 		model.addAttribute("reviews", this.reviewService.reviewsNotByCredentials(credentials, album.getReviews()));

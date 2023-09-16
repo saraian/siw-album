@@ -1,21 +1,24 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Modifica artista</title>
-		<link  rel="stylesheet" th:href="@{css/1template.css}"/>
+		<title>Modifica album</title>
+		<link  rel="stylesheet" th:href="@{/css/2template.css}"/>
 	</head>
 	<body>
 		<header th:replace="fragments/base.html::intestazione"></header>
-		<h1> Aggiorna le informazioni dell'artista </h1>
+		<h1> Aggiorna le informazioni dell'album </h1>
 		<div>
 			<form th:action="@{/updateAlbumInfo/{idAlbum} (idAlbum=${album.id})}" method="POST" th:object="${album}">
 			<div>
-			<label>Nome:</label> <span><input required type="text" th:field="${album.title}" th:value="${album.title}"/></span>
+			<label>Nome:</label> 
+			<span><input required type="text" th:field="${album.title}" th:value="${album.title}"/></span>
 			</div> 
-			<label>Descrizione:</label> <span><input required type="number" th:field="${album.year}" th:value="${album.year}"/></span> 
+			<label>Descrizione:</label>
+			<span><input required type="number" th:field="${album.year}" th:value="${album.year}"/></span> 
 			</div>
 			<div>
-			<label>Immagine:</label> <span><input required type="url" th:field="${album.cover}" th:value="${album.cover}"/></span>
+			<label>Immagine:</label> 
+			<span><input required type="url" th:field="${album.cover}" th:value="${album.cover}"/></span>
 			</div> 
 			<button type="submit"> Applica </button> 
 			</form>

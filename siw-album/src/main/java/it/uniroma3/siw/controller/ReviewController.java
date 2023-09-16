@@ -76,6 +76,6 @@ public class ReviewController {
 		model.addAttribute("album", album);
 		model.addAttribute("userReviews", this.reviewService.reviewsByCredentials(credentials, album.getReviews()));
 		model.addAttribute("reviews", this.reviewService.reviewsNotByCredentials(credentials, album.getReviews()));
-		return "productUpdateComment.html";
+		return "album.html";
 	}
 }

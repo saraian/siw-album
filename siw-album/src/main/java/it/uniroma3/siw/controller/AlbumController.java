@@ -142,8 +142,8 @@ public class AlbumController {
 			found.setYear(album.getYear());
 			this.albumRepository.save(found);
 			model.addAttribute("album",found);
-			model.addAttribute("userReviews", this.reviewService.reviewsByCredentials(credentials, album.getReviews()));
-			model.addAttribute("reviews", this.reviewService.reviewsNotByCredentials(credentials, album.getReviews()));
+			model.addAttribute("userReviews", this.reviewService.reviewsByCredentials(credentials, found.getReviews()));
+			model.addAttribute("reviews", this.reviewService.reviewsNotByCredentials(credentials, found.getReviews()));
 			return "album.html";
 		}
 		model.addAttribute("messaggioErrore", "Assicurati che tutti i campi siano validi");

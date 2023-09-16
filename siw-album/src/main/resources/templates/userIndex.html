@@ -2,15 +2,17 @@
 <html>
 	<head>
 		<title>Homepage</title>
-		<link rel="stylesheet" href="/stile.css?version=3"/>
+		<link  rel="stylesheet" th:href="@{css/2template.css}"/>
 	</head>
-	<body>
-		<h1> Indice Film </h1>
-		<a href="albums.html" th:href="@{/albums}"> 
-			<div> Visualizza il il catalogo degli album </div>
+	<body class="home">
+		<article th:replace="fragments/base.html::intestazione"></article>
+		<div class="indexBody">
+		<span class="flex-index">
+		<a href="discographyForArtists.html" th:href="@{/findArtistDiscography}"> 
+			<div> Esplora la discografia di un artista </div>
 		</a>
-		<h1> Indice Artisti </h1>
-		<a href="artists.html" th:href="@{/artists}"> 
-			<div> Visualizza tutti gli artisti </div>
-		</a>
+		</span>
+		</div>
+		<footer th:replace="fragments/base.html::footer"></footer>
 	</body>
+</html>

@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Aggiungi o rimuovi attori</title>
-		<link rel="stylesheet" href="/stile.css?version=3"/>
+		<title>Aggiungi o rimuovi autori</title>
+		<link  rel="stylesheet" th:href="@{/css/2template.css}"/>
 	</head>
 	<body>
 	<header th:replace="fragments/base.html::intestazione"></header>
@@ -21,6 +21,7 @@
 						<li th:text="${other.artName}"> Nome </li> 
 					</button>
 				</form>
-			</div>
+			</div>	
+		<footer th:replace="fragments/base.html::footer"></footer>
 	</body>
 </html>

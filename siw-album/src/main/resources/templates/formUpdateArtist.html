@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<title>Gestisci artisti</title>
-		<link rel="stylesheet" href="/stile.css?version=3"/>
+		<link  rel="stylesheet" th:href="@{/css/2template.css}"/>
 	</head>
 	<body>
 		<header th:replace="fragments/base.html::intestazione"></header>
@@ -13,5 +13,6 @@
 		<div>
 			<a th:href="@{/updateArtistInfo/{id} (id=${artist.id})}"> Aggiorna le informazioni di questo artista </a>
 		</div>
+		<footer th:replace="fragments/base.html::footer"></footer>
 	</body>
 </html>

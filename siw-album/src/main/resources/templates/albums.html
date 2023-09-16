@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Lista film</title>
-		<link rel="stylesheet" href="/stile.css?version=3"/>
+		<title>Lista album</title>
+		<link  rel="stylesheet" th:href="@{/css/2template.css}"/>
 	</head>
 	<body>
-	<header th:replace="fragments/base.html::intestazione"></header>
-	<h1>Film</h1>
+	<article th:replace="fragments/base.html::intestazione"></article>
+	<h1>Album</h1>
 		<div th:if="${albums.empty}"> 
 			<div> Non ci sono album </div>
 		</div>
@@ -15,5 +15,6 @@
 				<li th:text="${album.title}">Titolo Album </li> 
 			</a>
 		</div>
+	<footer th:replace="fragments/base.html::footer"></footer>
 	</body>
 </html>

@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<title>Album</title>
-		<link  rel="stylesheet" th:href="@{css/2template.css}"/>
+		<link  rel="stylesheet" th:href="@{/css/2template.css}"/>
 	</head>
 	<body>
 		<header th:replace="fragments/base.html::intestazione"></header>
@@ -29,7 +29,7 @@
 					<span th:if="${#fields.hasErrors('text')}" th:errors="*{text}"></span>
 				</div>
 				<div>
-					<label>Voto:</label> <span><input required type="range" min="1" max="100" value="1" class="slider" oninput="rangeValue.innerText=this.value" th:field="${upReview.vote}"/> </span> <span id="rangeValue"> </span>
+					<label>Voto:</label> <span><input required type="range" min="1" max="100" value="1" class="slider" oninput="rangeValue.innerText=this.value" th:field="${newReview.vote}"/> </span> <span id="rangeValue"> </span>
 					<span th:if="${#fields.hasErrors('vote')}" th:errors="*{vote}"></span>
 				</div>
 				<div>
@@ -51,5 +51,6 @@
 			</div>
 		</div>
 		<div th:unless="${album}">Non esiste</div>	
+		<footer th:replace="fragments/base.html::footer"></footer>
 	</body>
 </html>

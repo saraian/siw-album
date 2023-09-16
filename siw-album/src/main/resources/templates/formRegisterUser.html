@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<title>Login</title>
-		<link rel="stylesheet" href="/stile.css?version=3"/>
+		<link  rel="stylesheet" th:href="@{css/2template.css}"/>
 	</head>
 	<body>
 	<header th:replace="fragments/base.html::intestazione"></header>
@@ -34,7 +34,11 @@
 	</div>
 	<div>
 	<span><button type="submit" value="Register">Conferma </button> </span>
+	<a href="login.html" th:href="@{/login}"> 
+		<div> Torna al login </div>
+	</a>
 	</div>
 	</form>
+	<footer th:replace="fragments/base.html::footer"></footer>
 	</body>
 </html>

@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<title>Modifica artista</title>
-		<link  rel="stylesheet" th:href="@{css/1template.css}"/>
+		<link  rel="stylesheet" th:href="@{/css/2template.css}"/>
 	</head>
 	<body>
 		<header th:replace="fragments/base.html::intestazione"></header>
@@ -10,12 +10,15 @@
 		<div>
 			<form th:action="@{/updateArtistInfo/{idArtist} (idArtist=${artist.id})}" method="POST" th:object="${artist}">
 			<div>
-			<label>Nome:</label> <span><input required type="text" th:field="${artist.artName}" th:value="${artist.artName}"/></span>
+			<label>Nome:</label> 
+			<span><input required type="text" th:field="${artist.artName}" th:value="${artist.artName}"/></span>
 			</div> 
-			<label>Descrizione:</label> <span><input required type="text" th:field="${artist.description}" th:value="${artist.description}"/></span> 
+			<label>Descrizione:</label> 
+			<span><input required type="text" th:field="${artist.description}" th:value="${artist.description}"/></span> 
 			</div>
 			<div>
-			<label>Immagine:</label> <span><input required type="url" th:field="${artist.urlImage}" th:value="${artist.urlImage}"/></span>
+			<label>Immagine:</label> 
+			<span><input required type="url" th:field="${artist.urlImage}" th:value="${artist.urlImage}"/></span>
 			</div> 
 			<button type="submit"> Applica </button> 
 			</form>

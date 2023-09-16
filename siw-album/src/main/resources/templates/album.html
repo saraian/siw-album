@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<title>Album</title>
-		<link  rel="stylesheet" th:href="@{css/2template.css}"/>
+		<link  rel="stylesheet" th:href="@{/css/2template.css}"/>
 	</head>
 	<body>
 		<header th:replace="fragments/base.html::intestazione"></header>
@@ -32,5 +32,6 @@
 			</div>
 		</div>
 		<div th:unless="${album}">Non esiste</div>	
+		<footer th:replace="fragments/base.html::footer"></footer>
 	</body>
 </html>

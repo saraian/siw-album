@@ -1,15 +1,16 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Film</title>
-		<link rel="stylesheet" href="/stile.css?version=2"/>
+		<title>Scheda artista</title>
+		<link  rel="stylesheet" th:href="@{/css/2template.css}"/>
 	</head>
 	
 	<body>
 		<header th:replace="fragments/base.html::intestazione"></header>
 		<div th:if="${artist}">
 			<h1 th:text="${artist.artName}">Nome artista</h1>
-			<span><img width="30%" th:src=${artist.urlImage}/></span>
+			<span><img width="50%" th:src=${artist.urlImage}/></span>
+			<span><p th:text="${artist.description}"></p></span>
 		</div>
 		<div th:unless="${artist}">Non esiste</div>	
 	</body>

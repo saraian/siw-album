@@ -2,9 +2,10 @@
 <html>
 	<head>
 		<title>Nuovo album</title>
-		<link rel="stylesheet" href="/stile.css?version=3"/>
+		<link  rel="stylesheet" th:href="@{css/2template.css}"/>
 	</head>
 	<body>
+	<div class="other">
 	<header th:replace="fragments/base.html::intestazione"></header>
 	<h1>Aggiungi un album </h1>
 	<form th:action="@{/albums}" method="POST" th:object="${album}">
@@ -26,5 +27,7 @@
 	<span><button type="submit">Conferma </button> </span>
 	</div>
 	</form>
+	</div>
+	<footer th:replace="fragments/base.html::footer"></footer>
 	</body>
 </html>

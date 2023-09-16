@@ -1,0 +1,156 @@
+article {
+	display:flex;
+	flex-direction:column;
+	height: 100%;
+}
+
+header {
+  background-color:#93947A;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  font-size: x-large;
+  height: 150px;
+  flex-direction: column;
+}
+
+nav {
+	background-color:#70715B; 
+	display: flex;
+	margin:0;
+}
+
+footer {
+	background-color:#70715B; 
+	display: flex;
+	margin:0;
+	height:50px;
+	justify-content: center;
+	align-items: center;
+  	margin-top: 300px;
+}
+
+body {
+	margin-top: 0;
+	margin-left: 0;
+	margin-right: 0;
+	margin-bottom: 0;
+	background-color: #E7E0B3;
+	font-family: 'Courier', monospace;
+	color: #341C1C;
+}
+
+.index {
+	text-align: center;
+}
+
+a:link {
+	text-decoration:none;
+	color: #341C1C;
+}
+
+a:visited {
+	text-decoration:none;
+	color: #341C1C;
+}
+
+a:hover {
+	text-decoration:none;
+	color: #A35C3E;
+}
+
+.logOut, .homePage {
+	color:#D6D6D1;
+}
+
+.logOut {
+	margin: 0;
+}
+
+.indexBody {
+	background-image:url("homeimage2.webp");
+	background-position: center;
+	height: 500px; 
+  	background-position: center; 
+  	background-repeat: no-repeat; 
+  	background-size: cover; 
+  	display: flex;
+  	justify-content: center;
+  	align-items: baseline;
+  	flex-direction: column;
+  	font-size: x-large;
+  	color: #D89E44;
+  	text-align:center;
+}
+
+.indexUser {
+	background-image:url("homeimage2.webp");
+	background-position: center;
+	height: 500px; 
+  	background-position: center; 
+  	background-repeat: no-repeat; 
+  	background-size: cover;
+  	color: #D89E44;
+	display:flex;
+	justify-content: flex-end;
+  	align-items: baseline;
+  	flex-direction: column;
+}
+
+
+form {
+	display:flex;
+	text-align:left;
+  	flex-direction: column;
+  	justify-content: center;
+  	align-items:center;
+}
+
+.indexArtist {
+	margin:20px;
+}
+
+.albumI {
+	margin-top:0;
+	margin-bottom:0;
+	color: #512D21;
+}
+
+.flex-index {
+	margin: 10px 20px;
+	font-weight: bold;
+	font-size: x-large;
+}
+
+.indexBody, .indexUser a:link {
+	color: #D89E44;
+}
+
+.indexUser, .indexUser a:visited {
+	color: #D89E44;
+}
+
+.indexUser a:hover {
+	color: #A35C3E;
+}
+
+button {
+  background-color: #366662;
+  color: white;
+  padding: 5px 10px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+label {
+	text-align:left;
+	display:table;
+}
+
+div, h1 {
+	text-align:center;
+}
+
+li {
+	list-style-type: none;
+}

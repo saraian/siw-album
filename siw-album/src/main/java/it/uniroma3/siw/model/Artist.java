@@ -8,6 +8,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.Transient;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
@@ -56,6 +57,12 @@ public class Artist {
 	public void setUrlImage(String urlImage) {
 		this.urlImage = urlImage;
 	}
+	@Transient
+    public String getUrlImageImagePath() {
+        if (urlImage == null || id == null) return null;
+         
+        return "/album-covers/" + hashCode() + "/" + urlImage;
+    }
 	@Override
 	public int hashCode() {
 		return Objects.hash(id, description);

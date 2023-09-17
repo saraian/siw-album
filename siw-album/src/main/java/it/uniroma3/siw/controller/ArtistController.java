@@ -1,13 +1,19 @@
 package it.uniroma3.siw.controller;
 
+import java.io.IOException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.view.RedirectView;
 
 import it.uniroma3.siw.model.Artist;
 import it.uniroma3.siw.repository.ArtistRepository;
@@ -28,16 +34,21 @@ public class ArtistController {
 	}
 	
 	@PostMapping("/artists")
-	public String newArtist(@ModelAttribute("artist") Artist artist, BindingResult bindingResult, Model model) {
+	public RedirectView newArtist(@ModelAttribute("artist") Artist artist, @RequestParam("image") MultipartFile multipartFile,
+			BindingResult bindingResult, Model model) throws IOException {
 		artistValidator.validate(artist, bindingResult);
 		if(!bindingResult.hasErrors()) {
+			String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
+			artist.setUrlImage(fileName);
 			this.artistRepository.save(artist);
 			model.addAttribute("artist", artist);
-			return "artist.html";
+			String uploadDir="album-covers/"+artist.hashCode();
+			FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
+			return new RedirectView("/artists", true);
 		}
 		else {
 			model.addAttribute("messaggioErrore", "Questo artista esiste già");
-			return "formNewArtist.html";
+			return new RedirectView("/formNewArtist", true);
 		}
 	}
 	
@@ -77,23 +88,26 @@ public class ArtistController {
 	@GetMapping("/updateArtistInfo/{idArtist}")
 	public String updateProduct(@PathVariable("idArtist") Long idArtist, Model model) {
 		Artist artist=this.artistService.findArtistById(idArtist);
+		Artist newArtist=new Artist();
+		newArtist.setArtName(artist.getArtName());
+		newArtist.setDescription(artist.getDescription());
 		model.addAttribute("artist", artist);
+		model.addAttribute("newArtist", newArtist);
 		return "formUpdateInfo.html";
 	}
 	
 	@PostMapping("/updateArtistInfo/{idArtist}") 
-	public String updateArtistInfo(@ModelAttribute("artist") Artist artist, @PathVariable("idArtist") Long idArtist, Model model) {
+	public String updateArtistInfo(@ModelAttribute("newArtist") Artist artist, @PathVariable("idArtist") Long idArtist, Model model) {
 		Artist found=this.artistService.findArtistById(idArtist);
 		if(!artist.getArtName().isBlank()&&!(artist.getUrlImage().isEmpty())) {
 			found.setAlbumsWritten(artist.getAlbumsWritten());
 			found.setArtName(found.getArtName());
 			found.setDescription(artist.getDescription());
-			found.setUrlImage(artist.getUrlImage());
 			this.artistRepository.save(found);
 			model.addAttribute("artist",found);
 			return "artist.html";
 		}
-		model.addAttribute("messaggioErrore", "Assicurati di aggiungere sia un nome che un'immagine validi");
+		model.addAttribute("messaggioErrore", "Assicurati di aggiungere campi validi");
 		return "formUpdateInfo.html";
 	}
 	

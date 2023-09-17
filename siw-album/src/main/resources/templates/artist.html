@@ -9,7 +9,7 @@
 		<header th:replace="fragments/base.html::intestazione"></header>
 		<div th:if="${artist}">
 			<h1 th:text="${artist.artName}">Nome artista</h1>
-			<span><img width="50%" th:src=${artist.urlImage}/></span>
+			<img th:src="@{${artist.urlImageImagePath}}" width="500px"/>
 			<span><p th:text="${artist.description}"></p></span>
 		</div>
 		<div th:unless="${artist}">Non esiste</div>	

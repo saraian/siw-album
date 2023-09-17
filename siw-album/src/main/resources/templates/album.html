@@ -8,7 +8,7 @@
 		<header th:replace="fragments/base.html::intestazione"></header>
 		<div th:if="${album}">
 			<h1 th:text="${album.title}">Titolo Album</h1>
-			<span><img width="30%" th:src=${album.cover}/></span>
+			<img th:src="@{${album.coverImagePath}}" width="500px"/>
 			<h2> Autori: </h2>
 			<div th:each="author:${album.artist}">
 			<a th:href="@{/artists/{id} (id=${author.id})}">

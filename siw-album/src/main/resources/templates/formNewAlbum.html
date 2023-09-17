@@ -8,7 +8,8 @@
 	<div class="other">
 	<header th:replace="fragments/base.html::intestazione"></header>
 	<h1>Aggiungi un album </h1>
-	<form th:action="@{/albums}" method="POST" th:object="${album}">
+	<div><p th:text="${messaggioErrore}"> </p></div>
+	<form th:action="@{/albums}" method="POST" th:object="${album}" enctype="multipart/form-data">
 	<div th:if="${#fields.globalErrors()}" th:text="${err}">
 		<p th:each="err:${#fields.globalErrors()}" th:text="${err}">...</p>
 	</div>
@@ -21,7 +22,7 @@
 		<span th:if="${#fields.hasErrors('year')}" th:errors="*{year}"></span>
 	</div>
 	<div>
-		<label>Copertina:</label> <span><input required type="url" th:field="${album.cover}"/></span>
+		<label>Immagine:</label><span><input type="file" name="image" accept="image/png, image/jpeg"/></span>
 	</div>
 	<div>
 	<span><button type="submit">Conferma </button> </span>

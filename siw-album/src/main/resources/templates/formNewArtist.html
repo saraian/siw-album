@@ -7,7 +7,7 @@
 	<body>
 	<header th:replace="fragments/base.html::intestazione"></header>
 	<h1>Aggiungi un artista </h1>
-	<form th:action="@{/artists}" method="POST" th:object="${artist}">
+	<form th:action="@{/artists}" method="POST" th:object="${artist}" enctype="multipart/form-data">
 	<div th:if="${#fields.globalErrors()}" th:text="${err}">
 		<p th:each="err:${#fields.globalErrors()}" th:text="${err}">...</p>
 	</div>
@@ -16,11 +16,11 @@
 		<span th:if="${#fields.hasErrors('artName')}" th:errors="*{artName}"></span>
 	</div>
 	<div>
-		<label>Descrizione:</label><span><input required type="text" th:field="${artist.description}"/></span>
+		<label>Descrizione:</label><span><input class="bigText" required type="text" th:field="${artist.description}"/></span>
 		<span th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></span>
 	</div>
 	<div>
-		<label>URL immagine:</label><span><input type="url" th:field="${artist.urlImage}"/></span>
+		<label>Immagine:</label><span><input type="file" name="image" accept="image/png, image/jpeg"/></span>
 	</div>
 	<div>
 	<span><button type="submit"> Conferma </button> </span>

@@ -3,12 +3,14 @@ package it.uniroma3.siw.model;
 import java.util.List;
 import java.util.Objects;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.Transient;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
@@ -26,6 +28,7 @@ public class Album {
 	@Min(1700)
 	@Max(2023)
 	private Integer year;
+	@Column(nullable = true, length = 64)
 	private String cover;
 	@ManyToMany(mappedBy="albumsWritten")
 	private List<Artist> artist;
@@ -68,6 +71,12 @@ public class Album {
 	public void setReviews(List<Review> reviews) {
 		this.reviews = reviews;
 	}
+	@Transient
+    public String getCoverImagePath() {
+        if (cover == null || id == null) return null;
+         
+        return "/album-covers/" + id + "/" + cover;
+    }
 	@Override
 	public int hashCode() {
 		return Objects.hash(id, title, cover, year);

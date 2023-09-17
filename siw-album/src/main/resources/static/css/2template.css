@@ -154,3 +154,11 @@ div, h1 {
 li {
 	list-style-type: none;
 }
+
+.bigText {
+	min-height:40px;
+	line-height:20px;
+	resize: both;
+	overflow:hidden;
+	
+}

@@ -12,6 +12,7 @@
 			<div>
 			<label>Nome:</label> 
 			<span><input required type="text" th:field="${newArtist.artName}" th:value="${newArtist.artName}"/></span>
+			<span th:if="${#fields.hasErrors('artName')}" th:errors="*{artName}"></span>
 			</div> 
 			<label>Descrizione:</label> 
 			<span><input required type="text" th:field="${newArtist.description}" th:value="${newArtist.description}"/></span> 

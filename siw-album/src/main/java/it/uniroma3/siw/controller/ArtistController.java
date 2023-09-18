@@ -97,11 +97,13 @@ public class ArtistController {
 	}
 	
 	@PostMapping("/updateArtistInfo/{idArtist}") 
-	public String updateArtistInfo(@ModelAttribute("newArtist") Artist artist, @PathVariable("idArtist") Long idArtist, Model model) {
+	public String updateArtistInfo(@ModelAttribute("newArtist") Artist artist, 
+			BindingResult bindingResult, @PathVariable("idArtist") Long idArtist, Model model) {
+		this.artistValidator.validate(artist, bindingResult);
 		Artist found=this.artistService.findArtistById(idArtist);
-		if(!artist.getArtName().isBlank()&&!(artist.getUrlImage().isEmpty())) {
+		if(!bindingResult.hasErrors()) {
 			found.setAlbumsWritten(artist.getAlbumsWritten());
-			found.setArtName(found.getArtName());
+			found.setArtName(artist.getArtName());
 			found.setDescription(artist.getDescription());
 			this.artistRepository.save(found);
 			model.addAttribute("artist",found);

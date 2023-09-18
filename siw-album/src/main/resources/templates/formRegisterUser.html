@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Login</title>
+		<title>Registrati</title>
 		<link  rel="stylesheet" th:href="@{css/2template.css}"/>
 	</head>
 	<body>
@@ -11,6 +11,7 @@
 	<div th:if="${#fields.globalErrors()}" th:text="${err}">
 		<p th:each="err:${#fields.globalErrors()}" th:text="${err}">...</p>
 	</div>
+	<div><p th:text="${messaggioErrore}"> </p> </div>
 	<div>
 		<label>Nome:</label> <span><input type="text" th:field="${user.name}"/></span>
 	</div>

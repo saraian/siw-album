@@ -140,10 +140,12 @@ public class AlbumController {
 	}
 	
 	@PostMapping("/updateAlbumInfo/{idAlbum}") 
-	public String updateProductName(@ModelAttribute("newAlbum") Album album, @PathVariable("idAlbum") Long idAlbum, Model model) {
+	public String updateProductName(@ModelAttribute("newAlbum") Album album, BindingResult bindingResult,
+			@PathVariable("idAlbum") Long idAlbum, Model model) {
+		this.albumValidator.validate(album, bindingResult);
 		Album found=this.albumService.findAlbumById(idAlbum);
 		Credentials credentials=credentialsService.findCredentials();
-		if(!album.getTitle().isBlank()) {
+		if(!bindingResult.hasErrors()) {
 			found.setTitle(album.getTitle());
 			found.setYear(album.getYear());
 			this.albumRepository.save(found);

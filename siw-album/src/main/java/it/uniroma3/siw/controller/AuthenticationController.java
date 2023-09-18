@@ -77,6 +77,7 @@ public class AuthenticationController {
 	
 	@GetMapping(value="/login?error=true") 
 	public String loginError(Model model) {
+		model.addAttribute("messaggioErrore", "Credenziali non valide");
 		return "login.html";
 	}
 	

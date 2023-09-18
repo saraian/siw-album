@@ -18,7 +18,7 @@
 		<span th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></span>
 	</div>
 	<div>
-		<label>Anno:</label> <span><input required type="text" th:field="${album.year}"/></span>
+		<label>Anno:</label> <span><input required type="number" th:field="${album.year}"/></span>
 		<span th:if="${#fields.hasErrors('year')}" th:errors="*{year}"></span>
 	</div>
 	<div>

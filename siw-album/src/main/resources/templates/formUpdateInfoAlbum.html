@@ -12,8 +12,9 @@
 			<div>
 			<label>Nome:</label> 
 			<span><input required type="text" th:field="${newAlbum.title}" th:value="${newAlbum.title}"/></span>
+			<span th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></span>
 			</div> 
-			<label>Descrizione:</label>
+			<label>Anno:</label>
 			<span><input required type="number" th:field="${newAlbum.year}" th:value="${newAlbum.year}"/></span> 
 			</div>
 			<button type="submit"> Applica </button> 
